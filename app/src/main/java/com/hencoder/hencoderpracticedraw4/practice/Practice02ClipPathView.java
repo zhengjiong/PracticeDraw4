@@ -39,7 +39,27 @@ public class Practice02ClipPathView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+
+        canvas.save();
+        Path path = new Path();
+        /**
+         * 顺时针 (CW clockwise) 和逆时针 (CCW counter-clockwise) 。对于普通情况，
+         * 这个参数填 CW 还是填 CCW 没有影响。它只是在需要填充图形 (Paint.Style 为 FILL
+         * 或  FILL_AND_STROKE) ，并且图形出现自相交时，用于判断填充范围的。
+         */
+        path.addCircle(point1.x + 200, point1.y + 200, 150, Path.Direction.CW);
+        canvas.clipPath(path);
+
         canvas.drawBitmap(bitmap, point1.x, point1.y, paint);
+        canvas.restore();
+
+
+        path.reset();
+        path.addCircle(point2.x + 200, point2.y + 200, 150, Path.Direction.CW);
+        path.setFillType(Path.FillType.INVERSE_EVEN_ODD);//用来设置图形自相交时的填充算法
+        canvas.clipPath(path);
         canvas.drawBitmap(bitmap, point2.x, point2.y, paint);
+
+
     }
 }

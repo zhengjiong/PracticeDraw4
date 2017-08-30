@@ -72,15 +72,44 @@ public class Practice14FlipboardView extends View {
         int x = centerX - bitmapWidth / 2;
         int y = centerY - bitmapHeight / 2;
 
-        canvas.save();
 
+        //1.画上半部分
+        canvas.save();
+        canvas.clipRect(
+                0,
+                0,
+                getMeasuredWidth(),
+                centerY
+        );
+        canvas.drawBitmap(bitmap, x, y, paint);
+        canvas.restore();
+
+
+        //2.画下半部分
         camera.save();
+        canvas.save();
+        if (degree > 90) {
+            //滚动大于90度的时候, 只显示上半部分
+            canvas.clipRect(
+                    0,
+                    0,
+                    getMeasuredWidth(),
+                    centerY
+            );
+        } else {
+            //滚动小于90度的时候, 只显示下半部分
+            canvas.clipRect(
+                    0,
+                    centerY,
+                    getMeasuredWidth(),
+                    getMeasuredHeight()
+            );
+        }
         camera.rotateX(degree);
         canvas.translate(centerX, centerY);
         camera.applyToCanvas(canvas);
-        canvas.translate(-centerX, -centerY);
         camera.restore();
-
+        canvas.translate(-centerX, -centerY);
         canvas.drawBitmap(bitmap, x, y, paint);
         canvas.restore();
     }

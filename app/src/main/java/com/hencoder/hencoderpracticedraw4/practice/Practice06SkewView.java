@@ -40,7 +40,10 @@ public class Practice06SkewView extends View {
 
 
         canvas.save();
-        //参数里的 sx 和 sy 是 x 方向和 y 方向的错切系数。
+        /**
+         * 参数里的 sx 和 sy 是 x 方向和 y 方向的错切系数。
+         * matrix可以设置错切的圆心, 见Practice10MatrixSkewView
+         */
         canvas.skew(0, 0.5f);
         canvas.drawBitmap(bitmap, point1.x, point1.y, paint);
         canvas.restore();

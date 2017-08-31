@@ -41,7 +41,8 @@ public class Practice07MatrixTranslateView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        Matrix matrix = new Matrix();
+        Matrix matrix = getMatrix();//这里可以用View自身的matrix, 也可以单独new一个出来
+        matrix.reset();
 
         matrix.postTranslate(-100, -100);
         canvas.save();

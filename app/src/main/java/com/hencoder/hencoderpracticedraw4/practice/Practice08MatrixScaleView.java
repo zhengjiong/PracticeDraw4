@@ -40,6 +40,10 @@ public class Practice08MatrixScaleView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        /**
+         * 参数里的 sx sy 是横向和纵向的放缩倍数； px py 是放缩的轴心。
+         */
+
         matrix.reset();
         matrix.postScale(1.3f, 1.3f, point1.x + bitmap.getWidth() / 2, point1.y + bitmap.getHeight() / 2);
         canvas.save();
